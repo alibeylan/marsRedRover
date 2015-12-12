@@ -4,12 +4,20 @@ public class Robot {
     private int locX;
     private int locY;
 
+    //Using the planet class to tell the robot's planet.
+    private Planet planet = null;
 
     //Initialise robot's position with orientation
     public Robot(Orientation orientation, int xLoc, int yLoc) {
         this.orientation = orientation;
         this.locX = xLoc;
         this.locY = yLoc;
+    }
+
+    //Tells the that is living in a planet that the user set before usiing the planet class. 
+    public void setPlanet(Planet planet) {
+
+        this.planet = planet;
     }
 
     /*Describe the moves that the robot has to make to turn or go forward */
