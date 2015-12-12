@@ -10,8 +10,8 @@ public class Planet {
     private ArrayList<String> scent;
 
     public Planet(int xMax, int yMax) {
-        this.maxX = maxX;
         this.maxY = maxY;
+        this.maxX = maxX;
         scent = new ArrayList<String>();
     }
 
@@ -26,7 +26,7 @@ public class Planet {
     }
 
     // are a set of coordinates out of bounds for this planet?
-    public boolean checkOutOfBounds(int x, int y) {
+    public boolean checkBounds(int x, int y) {
         return x < 0 || y < 0 || x > maxX || y > maxY;
     }
 
