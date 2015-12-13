@@ -14,7 +14,7 @@ public class Robot {
         this.locY = yLoc;
     }
 
-    //Tells the that is living in a planet that the user set before usiing the planet class. 
+    //Tells the that is living in a planet that the user set before usiing the planet class.
     public void setPlanet(Planet planet) {
 
         this.planet = planet;
