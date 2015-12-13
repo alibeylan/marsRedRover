@@ -12,7 +12,7 @@ public class Main {
         Planet planet = null;
         ArrayList<Robot> robots = new ArrayList<Robot>();
 
-        // Get planet description.
+        // Get planet's description.
         String planetSize;
         System.out.println("Let's make a planet!");
 
@@ -31,6 +31,48 @@ public class Main {
             }
         }
 
+        //Get the robot's details.
+        System.out.println("\n" +
+                "Please input in the first line the robot's coordinates and orientation (e.g. 1 1 S). \n" +
+                "In the second line enter the instructions that the robot has to follow.\n" +
+                "- F states for move forward one step.\n" +
+                "- L states for turning left.\n"+
+                "- R states for turning right./n"+
+                "When you are done, enter \"finish\" to continue.");
+
+        int currentRobot = 1;
+        Robot actualRobot;
+        String inputPosition;
+        String[] positionDescription;
+        String inputCommands;
+        while (true) {
+            // Get robot's position and orientation from console.
+            System.out.print("\nEnter the position and orientation for robot #" + currentRobot + " (e.g. 3 4 E): ");
+            inputPosition = s.nextLine().toUpperCase();
+
+            // Check if the user inputs the word "finish".
+            if (inputPosition.toLowerCase().equals("finish")) break;
+
+            // Verify that the input from the user is correct.
+            if (inputPosition.matches("[0-9]+\\s+[0-9]+\\s+[NESW]")) {
+                positionDescription = inputPosition.split("\\s+");
+
+                // Verify if the input position is inside the bounds of planet.
+                if (planet.checkBounds(Integer.parseInt(positionDescription[0]), Integer.parseInt(positionDescription[1]))) {
+                    // loop to try again
+                    System.err.println("\nPlease try to enter a position that is inside the bounds of the planet.");
+                    System.err.flush();
+                    continue;
+                }
+
+                // Start creating the robots.
+                actualRobot = new Robot(Robot.Orientation.valueOf(positionDescription[2]), Integer.parseInt(positionDescription[0]), Integer.parseInt(positionDescription[1]));
+            } else {
+                System.err.println("\nPlease enter the robot's position in the format (x y z) where x and y are coordinates\n and where z is the orientation: N, E, S or W.");
+                System.err.flush();
+                continue;
+            }
+        }
 
     }
 }
