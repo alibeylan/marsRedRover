@@ -2,11 +2,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String... args){
+    public static void main(String... args) {
 
 
         // Initialising console reader
-        Scanner s = new Scanner (System.in);
+        Scanner s = new Scanner(System.in);
 
         // We create an ArrayList so the app can store and evaluate all the robots that the user inputs.
         Planet planet = null;
@@ -36,15 +36,15 @@ public class Main {
                 "Please input in the first line the robot's coordinates and orientation (e.g. 1 1 S). \n" +
                 "In the second line enter the instructions that the robot has to follow.\n" +
                 "- F states for move forward one step.\n" +
-                "- L states for turning left.\n"+
-                "- R states for turning right./n"+
+                "- L states for turning left.\n" +
+                "- R states for turning right./n" +
                 "When you are done, enter \"finish\" to continue.");
 
         int currentRobot = 1;
         Robot actualRobot;
         String inputPosition;
         String[] positionDescription;
-        String inputCommands;
+        String instructions;
         while (true) {
             // Get robot's position and orientation from console.
             System.out.print("\nEnter the position and orientation for robot #" + currentRobot + " (e.g. 3 4 E): ");
@@ -72,7 +72,40 @@ public class Main {
                 System.err.flush();
                 continue;
             }
+            System.out.print("Enter the commands for robot #" + currentRobot + " (e.g. FFLRFFRL): ");
+            instructions = s.nextLine();
+
+            // are we done?
+            if (instructions.toLowerCase().equals("done")) break;
+
+            // parse commands
+            actualRobot.setInstructions(parseInstructions(instructions));
+
+            // add to set and continue
+            actualRobot.setPlanet(planet);
+            robots.add(actualRobot);
+            ++currentRobot;
+        }
+    }
+        public static ArrayList<Instructions> parseInstructions(String input) {
+            // set up output
+            ArrayList<Instructions> output = new ArrayList<Instructions>();
+
+            // split and loop through input
+            String[] instructions = input.split("");
+            for (String c : instructions) {
+                // try to parse by matching to enum
+                try {
+                    output.add(Instructions.valueOf(c));
+                } catch (IllegalArgumentException e) {
+                    // ignore invalid commands
+                }
+            }
+
+            return output;
         }
 
-    }
+        public enum Instructions {
+            F, L, R
+        }
 }

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Robot {
     //Orientation and Position of the robot
     private Orientation orientation;
@@ -6,6 +8,11 @@ public class Robot {
 
     //Using the planet class to tell the robot's planet.
     private Planet planet = null;
+
+    private boolean lost = false;
+
+    // mission statement
+    private ArrayList<Main.Instructions> instructions = null;
 
     //Initialise robot's position with orientation
     public Robot(Orientation orientation, int xLoc, int yLoc) {
@@ -20,6 +27,9 @@ public class Robot {
         this.planet = planet;
     }
 
+    public void setInstructions(ArrayList<Main.Instructions> commands) {
+        this.instructions = commands;
+    }
     /*Describe the moves that the robot has to make to turn or go forward */
 
     // Turn left move
